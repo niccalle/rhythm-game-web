@@ -7,7 +7,6 @@
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
-    "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm run start-message",
     "start": "concurrently -k -r -s first \"npm run test:watch\" \"npm run open:src\" \"npm run lint:watch\"",
@@ -30,9 +29,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "konva": "1.7.6",
     "object-assign": "4.1.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
+    "react-konva": "1.6.4",
     "react-redux": "5.0.5",
     "react-router-dom": "4.2.2",
     "react-router-redux": "5.0.0-alpha.6",
