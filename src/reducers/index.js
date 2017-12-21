@@ -1,7 +1,9 @@
 // Set up your root reducer here...
 import { combineReducers } from "redux";
-import gameTimerReducer from "./gameTimerReducer";
+import score from "./scoreReducer";
+import beatmap from "./beatmapReducer";
 
 export default combineReducers({
-  app: gameTimerReducer
+  score,
+  beatmap
 });
