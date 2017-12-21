@@ -1,14 +1,17 @@
 import { INCR_BEAT } from "../constants/actionTypes";
-import initialState from "./initialState";
 
-export default function gameTimerReducer(state = initialState, action) {
+const initialState = {
+  currentBeatmapCircles: []
+};
+
+export default function beatmapReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case INCR_BEAT:
-      newState = { ...state };
-      newState.beatMap = {
+      newState = {
+        ...state,
         currentBeatmapCircles: [
-          ...newState.beatMap.currentBeatmapCircles,
+          ...state.currentBeatmapCircles,
           { x: Math.random() * 500, y: Math.random() * 500 }
         ]
       };
