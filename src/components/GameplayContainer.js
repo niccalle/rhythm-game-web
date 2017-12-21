@@ -1,11 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Layer, Stage } from "react-konva";
 import RhythmCircle from "./RhythmCircle";
-const GameTimer = require("./GameTimer");
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from "../actions/timerActions";
 
 class GameplayContainer extends React.Component {
   componentDidMount() {
-    GameTimer.start();
+    this.timer = setInterval(() => this.props.actions.incrementBeat(), 1000);
   }
 
   render() {
@@ -13,11 +16,29 @@ class GameplayContainer extends React.Component {
     return (
       <Stage width={700} height={700}>
         <Layer>
-          <RhythmCircle x={200} y={200} approachingDistance={100} />
+          {this.props.beatMap.currentBeatmapCircles.map(circle => (
+            <RhythmCircle x={circle.x} y={circle.y} approachingDistance={100} />
+          ))}
         </Layer>
       </Stage>
     );
   }
 }
+GameplayContainer.propTypes = {
+  beatMap: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
+};
 
-export default GameplayContainer;
+function mapStateToProps(state) {
+  return {
+    beatMap: state.app.beatMap
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameplayContainer);
