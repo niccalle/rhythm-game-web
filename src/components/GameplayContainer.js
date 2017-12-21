@@ -1,8 +1,13 @@
 import React from "react";
 import { Layer, Stage } from "react-konva";
 import RhythmCircle from "./RhythmCircle";
+const GameTimer = require("./GameTimer");
 
 class GameplayContainer extends React.Component {
+  componentDidMount() {
+    GameTimer.start();
+  }
+
   render() {
     // render multiple circles here
     return (
