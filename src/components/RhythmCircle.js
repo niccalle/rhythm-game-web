@@ -27,11 +27,15 @@ class RhythmCircle extends React.Component {
 
   tick(){
     this.setState({
-      approachingDistance: this.state.approachingDistance-((RHYTHM_RADIUS - CIRCLE_RADIUS) / 100)
+      approachingDistance: this.state.approachingDistance-((RHYTHM_RADIUS - CIRCLE_RADIUS) / 50)
     });
 
-    if(this.state.approachingDistance <= 0){
+    if(this.state.approachingDistance <= CIRCLE_RADIUS / 2){
       clearInterval(this.timerID);
+      this.setState({
+        exists: false
+      });
+      console.log("Miss");
     }
   }
 
@@ -42,6 +46,16 @@ class RhythmCircle extends React.Component {
     clearInterval(this.timerID);
     // Increment score
     // Grade timing based on approaching distance
+    if (this.state.approachingDistance > CIRCLE_RADIUS * 2) {
+      console.log("Miss");
+    }
+    else if (this.state.approachingDistance <= CIRCLE_RADIUS - 10 ||
+      this.state.approachingDistance > CIRCLE_RADIUS + 10) {
+      console.log("Bad");
+    }
+    else {
+      console.log("Good");
+    }
   }
 
   render() {
@@ -67,3 +81,11 @@ RhythmCircle.propTypes = {
 };
 
 export default RhythmCircle;
+
+
+export function incrementScore(amount) {
+  return {
+    type: 'INCREMENT_SCORE',
+    payload: amount,
+  };
+}
