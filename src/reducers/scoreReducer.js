@@ -15,7 +15,7 @@ export default function scoreReducer(state = initialState, action) {
         ...state,
         currentScore: state.currentScore + action.payload*100,
         notesHit: state.notesHit + action.payload,
-        notesTotal: state.notesHit + 1
+        notesTotal: state.notesTotal + 1
       };
 
     default:

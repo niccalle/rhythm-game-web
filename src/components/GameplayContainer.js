@@ -4,11 +4,12 @@ import { Layer, Stage } from "react-konva";
 import RhythmCircle from "./RhythmCircle";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as actions from "../actions/timerActions";
+import * as beatmapActions from "../actions/beatmapActions";
+import * as scoreActions from "../actions/scoreActions";
 
 class GameplayContainer extends React.Component {
   componentDidMount() {
-    this.timer = setInterval(() => this.props.actions.incrementBeat(), 1000);
+    this.timer = setInterval(() => this.props.actions.beatmapActions.incrementBeat(), 1000);
   }
 
   render() {
@@ -17,7 +18,11 @@ class GameplayContainer extends React.Component {
       <Stage width={700} height={700}>
         <Layer>
           {this.props.beatmap.currentBeatmapCircles.map(circle => (
-            <RhythmCircle x={circle.x} y={circle.y} approachingDistance={100} />
+            <RhythmCircle
+              x={circle.x}
+              y={circle.y}
+              approachingDistance={100}
+              incrementScore ={this.props.actions.scoreActions.incrementScore}/>
           ))}
         </Layer>
       </Stage>
@@ -39,7 +44,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: {
+      beatmapActions: bindActionCreators(beatmapActions, dispatch),
+      scoreActions: bindActionCreators(scoreActions, dispatch)
+    }
   };
 }
 

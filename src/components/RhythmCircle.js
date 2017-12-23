@@ -8,6 +8,7 @@ const CIRCLE_RADIUS = 40;
 class RhythmCircle extends React.Component {
   constructor(props) {
     super(props);
+    this.incrementScore= this.props.incrementScore;
     this.state = {
       approachingDistance: RHYTHM_RADIUS,
       exists: true
@@ -35,7 +36,7 @@ class RhythmCircle extends React.Component {
       this.setState({
         exists: false
       });
-      console.log("Miss");
+      this.incrementScore(0);
     }
   }
 
@@ -47,14 +48,14 @@ class RhythmCircle extends React.Component {
     // Increment score
     // Grade timing based on approaching distance
     if (this.state.approachingDistance > CIRCLE_RADIUS * 2) {
-      console.log("Miss");
+      this.incrementScore(0);
     }
     else if (this.state.approachingDistance <= CIRCLE_RADIUS - 10 ||
       this.state.approachingDistance > CIRCLE_RADIUS + 10) {
-      console.log("Bad");
+      this.incrementScore(.5);
     }
     else {
-      console.log("Good");
+      this.incrementScore(1);
     }
   }
 
@@ -77,15 +78,8 @@ class RhythmCircle extends React.Component {
 RhythmCircle.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  approachingDistance: PropTypes.number.isRequired
+  approachingDistance: PropTypes.number.isRequired,
+  incrementScore: PropTypes.func.isRequired
 };
 
 export default RhythmCircle;
-
-
-export function incrementScore(amount) {
-  return {
-    type: 'INCREMENT_SCORE',
-    payload: amount,
-  };
-}
