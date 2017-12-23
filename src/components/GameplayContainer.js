@@ -16,7 +16,8 @@ class GameplayContainer extends React.Component {
     // render multiple circles here
     return (
       <div>
-      Score: {this.props.score.currentScore}
+        <div> Score: {this.props.score.currentScore}</div>
+        <div> Accuracy: {this.props.score.notesHit/this.props.score.notesTotal*100}%</div>
         <Stage width={700} height={700}>
           <Layer>
             {this.props.beatmap.currentBeatmapCircles.map(circle => (
