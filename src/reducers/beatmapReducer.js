@@ -20,13 +20,20 @@ const getRandomMeasureColor = () => {
 // Current logic for determining if the new beat will be the start of a new measure
 // since we're just working with evenly spaced quarter notes right now, we're simplifying
 // the logic by saying if the current beat is 4 then the next beat will be a new measure
-const updateBeatAndColor = currentBeat => {
-  if (currentBeat !== 4) {
-    return { currentBeat: currentBeat + 1 };
+const updateStateAfterBeat = state => {
+  let currentBeat = state.currentBeat + 1;
+  let measureColor = state.measureColor;
+  if (currentBeat > 4) {
+    currentBeat = 1;
+    measureColor = getRandomMeasureColor();
   }
   return {
-    currentBeat: 1,
-    measureColor: getRandomMeasureColor()
+    currentBeat,
+    measureColor,
+    currentBeatmapCircles: [
+      ...state.currentBeatmapCircles,
+      { x: Math.random() * 500, y: Math.random() * 500, color: measureColor }
+    ]
   };
 };
 
@@ -36,11 +43,7 @@ export default function beatmapReducer(state = initialState, action) {
     case INCR_BEAT:
       newState = {
         ...state,
-        ...updateBeatAndColor(state.currentBeat),
-        currentBeatmapCircles: [
-          ...state.currentBeatmapCircles,
-          { x: Math.random() * 500, y: Math.random() * 500 }
-        ]
+        ...updateStateAfterBeat(state)
       };
       return newState;
 

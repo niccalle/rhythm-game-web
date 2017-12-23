@@ -31,7 +31,7 @@ class GameplayContainer extends React.Component {
               <RhythmCircle
                 x={circle.x}
                 y={circle.y}
-                color={this.props.beatmap.measureColor}
+                color={circle.color}
                 approachingDistance={100}
                 incrementScore={this.props.actions.scoreActions.incrementScore}
               />
