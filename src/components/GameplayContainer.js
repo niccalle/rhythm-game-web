@@ -15,24 +15,28 @@ class GameplayContainer extends React.Component {
   render() {
     // render multiple circles here
     return (
-      <Stage width={700} height={700}>
-        <Layer>
-          {this.props.beatmap.currentBeatmapCircles.map(circle => (
-            <RhythmCircle
-              x={circle.x}
-              y={circle.y}
-              approachingDistance={100}
-              incrementScore ={this.props.actions.scoreActions.incrementScore}/>
-          ))}
-        </Layer>
-      </Stage>
+      <div>
+      Score: {this.props.score.currentScore}
+        <Stage width={700} height={700}>
+          <Layer>
+            {this.props.beatmap.currentBeatmapCircles.map(circle => (
+              <RhythmCircle
+                x={circle.x}
+                y={circle.y}
+                approachingDistance={100}
+                incrementScore ={this.props.actions.scoreActions.incrementScore}/>
+            ))}
+          </Layer>
+        </Stage>
+      </div>
     );
   }
 }
 
 GameplayContainer.propTypes = {
   beatmap: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  score: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
