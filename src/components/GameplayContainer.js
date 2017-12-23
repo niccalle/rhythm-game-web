@@ -9,7 +9,10 @@ import * as scoreActions from "../actions/scoreActions";
 
 class GameplayContainer extends React.Component {
   componentDidMount() {
-    this.timer = setInterval(() => this.props.actions.beatmapActions.incrementBeat(), 1000);
+    this.timer = setInterval(
+      () => this.props.actions.beatmapActions.incrementBeat(),
+      1000
+    );
   }
 
   render() {
@@ -17,15 +20,21 @@ class GameplayContainer extends React.Component {
     return (
       <div>
         <div> Score: {this.props.score.currentScore}</div>
-        <div> Accuracy: {this.props.score.notesHit/this.props.score.notesTotal*100}%</div>
+        <div>
+          {" "}
+          Accuracy:{" "}
+          {this.props.score.notesHit / this.props.score.notesTotal * 100}%
+        </div>
         <Stage width={700} height={700}>
           <Layer>
             {this.props.beatmap.currentBeatmapCircles.map(circle => (
               <RhythmCircle
                 x={circle.x}
                 y={circle.y}
+                color={this.props.beatmap.measureColor}
                 approachingDistance={100}
-                incrementScore ={this.props.actions.scoreActions.incrementScore}/>
+                incrementScore={this.props.actions.scoreActions.incrementScore}
+              />
             ))}
           </Layer>
         </Stage>
