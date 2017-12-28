@@ -34,6 +34,7 @@ class GameplayContainer extends React.Component {
                 color={circle.color}
                 approachingDistance={100}
                 incrementScore={this.props.actions.scoreActions.incrementScore}
+                beat={this.props.beatmap.currentBeat}
               />
             ))}
           </Layer>

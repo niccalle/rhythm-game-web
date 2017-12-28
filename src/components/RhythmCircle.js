@@ -1,5 +1,5 @@
 import React from "react";
-import { Circle } from "react-konva";
+import { Circle, Text } from "react-konva";
 import PropTypes from "prop-types";
 
 const RHYTHM_RADIUS = 140;
@@ -9,6 +9,7 @@ class RhythmCircle extends React.Component {
   constructor(props) {
     super(props);
     this.incrementScore = this.props.incrementScore;
+    this.beat = this.props.beat;
     this.state = {
       approachingDistance: RHYTHM_RADIUS,
       exists: true
@@ -79,8 +80,15 @@ class RhythmCircle extends React.Component {
             opacity={this.getOpacity()}
             x={x}
             y={y}
-            fill={this.props.color}
+            stroke={this.props.color}
             onMouseDown={this.handleMousePress.bind(this)}
+          />,
+          <Text
+            x={x-20}
+            y={y-30}
+            text ={this.props.beat}
+            fontSize = {65}
+            fill={this.props.color}
           />
         ]
       : null;
