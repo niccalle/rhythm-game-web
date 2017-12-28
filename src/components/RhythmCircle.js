@@ -80,7 +80,7 @@ class RhythmCircle extends React.Component {
             opacity={this.getOpacity()}
             x={x}
             y={y}
-            stroke={this.props.color}
+            fill={this.props.color}
             onMouseDown={this.handleMousePress.bind(this)}
           />,
           <Text
@@ -88,7 +88,7 @@ class RhythmCircle extends React.Component {
             y={y-30}
             text ={this.props.beat}
             fontSize = {65}
-            fill={this.props.color}
+            fill={"white"}
           />
         ]
       : null;
