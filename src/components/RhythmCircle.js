@@ -24,6 +24,7 @@ class RhythmCircle extends React.Component {
   }
 
   tick() {
+    if (!this.props.isPlaying) return;
     this.setState({
       approachingDistance:
         this.state.approachingDistance - (RHYTHM_RADIUS - CIRCLE_RADIUS) / 50
@@ -92,7 +93,8 @@ RhythmCircle.propTypes = {
   y: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   approachingDistance: PropTypes.number.isRequired,
-  incrementScore: PropTypes.func.isRequired
+  incrementScore: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 export default RhythmCircle;

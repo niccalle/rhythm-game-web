@@ -1,11 +1,12 @@
-import { INCR_BEAT } from "../constants/actionTypes";
+import { INCR_BEAT, PAUSE } from "../constants/actionTypes";
 
 const RED = "#ff0000";
 
 const initialState = {
   currentBeatmapCircles: [],
   currentBeat: 0,
-  measureColor: RED
+  measureColor: RED,
+  isPlaying: true
 };
 
 // Get a new random color for the measure
@@ -44,6 +45,13 @@ export default function beatmapReducer(state = initialState, action) {
       newState = {
         ...state,
         ...updateStateAfterBeat(state)
+      };
+      return newState;
+
+    case PAUSE:
+      newState = {
+        ...state,
+        isPlaying: !state.isPlaying
       };
       return newState;
 

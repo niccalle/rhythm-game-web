@@ -9,11 +9,20 @@ import * as scoreActions from "../actions/scoreActions";
 
 class GameplayContainer extends React.Component {
   componentDidMount() {
-    this.timer = setInterval(
-      () => this.props.actions.beatmapActions.incrementBeat(),
-      1000
-    );
+    document.body.addEventListener("keydown", this.handleKeyPress);
+    this.timer = setInterval(() => this.timerCallback(), 1000);
   }
+
+  timerCallback() {
+    if (this.props.beatmap.isPlaying) {
+      this.props.actions.beatmapActions.incrementBeat();
+    }
+  }
+
+  handleKeyPress = event => {
+    if (document.activeElement.tagName === "INPUT") return;
+    this.props.actions.beatmapActions.handleKeyPress(event.key);
+  };
 
   render() {
     // render multiple circles here
@@ -33,6 +42,7 @@ class GameplayContainer extends React.Component {
                 y={circle.y}
                 color={circle.color}
                 approachingDistance={100}
+                isPlaying={this.props.beatmap.isPlaying}
                 incrementScore={this.props.actions.scoreActions.incrementScore}
               />
             ))}
