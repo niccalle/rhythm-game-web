@@ -5,3 +5,12 @@ export function incrementBeat() {
     type: types.INCR_BEAT
   };
 }
+
+export function handleKeyPress(key) {
+  switch (key) {
+    case "Escape":
+      return {
+        type: types.PAUSE
+      };
+  }
+}
