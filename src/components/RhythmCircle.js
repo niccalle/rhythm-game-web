@@ -86,10 +86,12 @@ class RhythmCircle extends React.Component {
           <Text
             x={x-20}
             y={y-30}
-            text ={this.props.beat}
+            text ={this.beat}
             fontSize = {65}
             fill={"white"}
+            onMouseDown={this.handleMousePress.bind(this)}
           />
+
         ]
       : null;
   }
@@ -100,7 +102,8 @@ RhythmCircle.propTypes = {
   y: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   approachingDistance: PropTypes.number.isRequired,
-  incrementScore: PropTypes.func.isRequired
+  incrementScore: PropTypes.func.isRequired,
+  beat: PropTypes.number.isRequired
 };
 
 export default RhythmCircle;
